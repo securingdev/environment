@@ -1,0 +1,136 @@
+FILE:
+:n  - open a new file  (can have file param)
+:e  - edit a file (can have file param) (same as :n, but requires a file)
+
+MOVEMENT:
+hjkl- left down up right (can have number init)
+H   - move to top of screen
+L   - move to bottom of screen
+SHIFT+G - goto EOF
+O   - move to the beginning of line
+$   - Move to end of line
+w   - Move to next word
+b   - move to last word
+e   - move to next word (last letter)
+ge  - move to last word (last letter)
+f<x>- find next letter in line (stops on it)
+F<x>- find last letter in line (stops on it)
+;   - repeat last f search
+,   - repeat last f search (backwards)
+:O  - Move to beginning of file
+:$  - Move to last line of file
+:#  - Move to line #
+B   - go to beginning word
+W   - go to end of word
+w   - stops at punctuation and chars
+SHIFT+I - go in front of line (insert mode)
+SHIFT+A - go in back of line (insert mode)
+``  - EOL
+
+INSERT:
+i   - insert
+I   - insert to begging of line
+a   - append
+A   - append to EOL
+o   - create new line under current line
+O   - create new line above current line
+
+EDIT:
+y    - copy char (can have number init)
+yyp  - duplicate line
+yy   - copy lines (can have number init)
+dd   - cut lines (can have number init)
+p    - paste buffer (can have number init)
+x    - delete current letter on cursor (can have number init)
+dw   - delete word on cursor
+r    - replace on cursor
+R    - replace until ESC
+cw   - change word, puts into insert
+D    - delete rest of line after cursor
+=    - auto indent
+<<   - indent left (can have number init)
+>>   - indent right (can have number init)
+ggVG - select all
+u    - undo
+^r   - redo
+~    - upper/lower case letter
+c    - change (like delete, but start writing)
+ci<x>- insert x would be form enclosures
+(ci")- replace everything in quotes and go to insert mode
+CMD+ad - do something to a paragraph block (etc, =ad will auto indent paragraph block)
+>i{  - decrease inner block indent
+<i{  - decrease inner block indent
+
+TABS:
+:tabnew - New tab (can have file param)
+:tabe   - edit file in a new tab  (can have file param) (same as tabnew, but requires a file)
+gt      - Next tab
+gT      - Previous tab
+    
+SEARCH:
+/   - Search forwards
+?   - Search backwards
+    n - move to next occurrence
+    N - moce to previous occurrence
+:% s/find/replace/g - find/replace ALL occurrences in a file
+:x-x ^^ number of lines
+:. ^^ current line
+
+SESSIONS:
+:mksession ~/session.vim  - make a session
+:source ~/session.vim     - Bring session back
+    (vim -S ~/session.vim)
+
+VISUAL:
+ctrl+ V     - visual block (exact)
+shift+V     - visual line
+VIS -> I    - insert text before the selected block
+VIS -> A    - insert text after the selected block
+VIS -> s    - replace text
+
+BUFFERS:
+(use :e or :n to create new buffers)
+:ls     - list buffers
+:b <buffer> - open buffer
+:bp     - move to previous buffer
+:bn     - move to next buffer
+
+SPLIT (uses buffers):
+:split (or :sp)  - split horizontally (can have file param)
+:vsplit (or :vs) - split verically (can have file param)
+^ww     - move between splits
+
+MACROS:
+q<x>    - record macro into char <x> (and stop recording macro)
+@<x>    - play macro
+@@      - play last macro
+#@(@)   - replay last macro # times
+
+ADDONS:
+
+EASYMOTION:
+\\  - handler with momement
+
+NERT TREE:
+^n - Open tree
+t  - open file in new tab
+
+NERD COMMENT: (most can have number init)
+\cc - Comment out the current line or text selected in visual mode. (can have number init)
+\c Toggles the comment state of the selected line(s). If the topmost selected line is commented, all selected lines are uncommented and vice versa.
+\cm Comments the given lines using only one set of multipart delimiters.
+\ci Toggles the comment state of the selected line(s) individually.
+\cs Comments out the selected lines ``sexily''
+\cy Same as \cc except that the commented line(s) are yanked first.
+\c$ Comments the current line from the cursor to the end of line.
+\cA Adds comment delimiters to the end of line and goes into insert mode between them. 
+
+OTHER:
+:!wc %   - count number words
+:!fmt %  - simple text formatting
+:%s/foo/bar/g   - Find each occurrence of 'foo' (in all lines), and replace it with 'bar'. 
+ex: :norm @p to apply to multiple lines
+.       - repeat last command
+t<x>    - ^^ stops before it
+: % y + - copy all lines in file
+:source $VIMRC - reload with vimrc 
