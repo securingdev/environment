@@ -82,6 +82,9 @@ let @v = "ggVG="
 " addon for auto compiling on save.
 let g:syntastic_java_javac_classpath = "../../*"
 
+" SQL Syntax Highlighting
+let g:sql_type_default = 'mysql'
+
 "let g:Powerline_symbols = 'fancy'
 
 filetype plugin on " Nerd Commenter
