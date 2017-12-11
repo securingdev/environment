@@ -1,0 +1,90 @@
+call pathogen#infect() " Runs the package manager (from bundle folder)
+
+set t_Co=256       " Explicitly tell Vim that the terminal supports 256 colors
+set backspace=2
+set number
+" Switch for Class Requirements
+set tw=80
+set formatoptions+=t
+" set spell
+set cursorline
+syntax enable
+"set background=dark " conficts with color scheme
+set autoindent
+set smartindent
+set smartcase
+set smarttab
+set ignorecase
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set incsearch
+" Splitting vertically Right & Down
+set splitright
+set splitbelow
+" mouse support
+set ttyfast
+set mouse=a " mouse support
+set ttymouse=xterm2
+
+set nocompatible   " Disable vi-compatibility, requies a full vim install
+set laststatus=2   " Always show the statusline
+set encoding=utf-8 " Necessary to show Unicode glyphs
+
+" Folding Settings
+"set foldmethod=indent   "fold based on indent
+set foldmethod=syntax   "fold based on syntax
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
+
+colorscheme molokai 
+" colorscheme codeschool
+
+" let g:molokai_original = 1 " conficts with custom color scheme
+let g:rehash256 = 1 " Themeing 256 colors
+
+" spelling toggle
+nmap \s :setlocal spell!<cr>
+" number line toggle (useful for copying code)
+nmap \l :setlocal number!<cr>
+" Used for java compiling from working folder
+" Makes j and k act like normal up and down on multi-lines
+nmap j gj
+nmap k gk
+nmap \e :sp $MYVIMRC<cr> " Edit vimrc
+nmap \r :so $MYVIMRC<cr> " Reload vimrc
+" Use compile scripts
+"nmap \co :w<cr> :! ../compileOnly.sh %<cr>
+"nmap \co :w<cr> :make %<cr>
+"nmap \cr :w<cr> :! ../compile.sh %<cr>
+" nmap \co :w<cr> :! ../compileOnly.sh *.java
+" Tab controls
+nmap <C-S-]> gt
+nmap <C-S-[> gT
+nmap <C-1> 1gt
+nmap <C-2> 2gt
+nmap <C-3> 3gt
+nmap <C-4> 4gt
+nmap <C-5> 5gt
+nmap <C-6> 6gt
+nmap <C-7> 7gt
+nmap <C-8> 8gt
+nmap <C-9> 9gt
+nmap <C-0> :tablast<CR>
+nmap <C-n> :NERDTreeToggle<CR>
+
+" JavaDoc Comment, needs rework
+let @c = "o/** NAME\<Esc>o*\<Esc>o* DESCRIPTION\<Esc>o*/\<Esc>kkkllR"
+" Auto tab page
+let @v = "ggVG="
+
+" addon for auto compiling on save.
+let g:syntastic_java_javac_classpath = "../../*"
+
+" SQL Syntax Highlighting
+let g:sql_type_default = 'mysql'
+
+"let g:Powerline_symbols = 'fancy'
+
+filetype plugin on " Nerd Commenter
