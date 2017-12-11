@@ -1,2 +1,2 @@
 # dotfiles
-Package files and settings for Bash, Burp, Screen, and VIM
+Package files and settings for Bash, Burp, JavaScript, Screen, and VIM
