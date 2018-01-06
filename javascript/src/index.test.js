@@ -11,7 +11,7 @@ describe('Example Test', () => {
 
 describe('index.html', () => {
     // Asynchronous tests require the 'done' parameter to be called after the expect
-    it('should say \"Hello World!\"', (done) => {
+    it('should say \"Users\"', (done) => {
         const index = fs.readFileSync('./src/index.html', "utf-8");
         jsdom.env(index, function(err, window) {
             const h1 = window.document.getElementsByTagName('h1')[0];
