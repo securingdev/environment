@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
