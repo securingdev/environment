@@ -19,6 +19,9 @@ export default {
     plugins: [
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor'
+        }),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
             minify: {
