@@ -1,5 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default {
     debug: true,
@@ -16,7 +17,11 @@ export default {
     },
     plugins: [
         new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin()
+        new webpack.optimize.UglifyJsPlugin(),
+        new HtmlWebpackPlugin({
+            template: 'src/index.html',
+            inject: true
+        })
     ],
     module: {
         loaders: [
