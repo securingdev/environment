@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -22,7 +20,7 @@ export default {
     },
     plugins: [
         new ExtractTextPlugin('[name].[contenthash].css'),
-        new webpack.WebpackMd5Hash(),
+        new WebpackMd5Hash(),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
