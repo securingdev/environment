@@ -40,6 +40,7 @@ export default {
                 minifyURLs: true
             },
             inject: true
+            // You can add things like `trackJSToken:` here for template injection
         })
     ],
     module: {
