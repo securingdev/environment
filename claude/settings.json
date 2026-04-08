@@ -1,0 +1,66 @@
+{
+  "env": {
+    "DISABLE_TELEMETRY": "1",
+    "UV_DEFAULT_PYTHON_VERSION": "3.11"
+  },
+  "permissions": {
+    "allow": [
+      "LS(*)",
+      "Read(**/*)",
+      "Grep(*)",
+      "Glob(**/*)",
+      "WebFetch(domain:*)",
+      "Bash(uv run ruff :*)",
+      "Bash(uv run ty check :*)",
+      "Bash(uv run python tests/*)",
+      "Bash(pnpm run lint:*)",
+      "Bash(rg :*)",
+      "Bash(fd :*)",
+      "Bash(eza :*)",
+      "Bash(bat :*)",
+      "Bash(delta :*)",
+      "Bash(fzf :*)",
+      "Bash(grep -r :*)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)"
+    ],
+    "deny": [
+      "Bash(rm -rf /*)",
+      "Bash(mkfs:*)",
+      "Bash(dd if=:*)",
+      "Bash(command *> /dev/sd*)",
+      "Bash(curl :*|bash:*)",
+      "Bash(wget :*|sh:*)",
+      "Bash(shutdown:*)",
+      "Bash(reboot:*)",
+      "Bash(:*:|:&:*)",
+      "Bash(chmod -R 777 /*)",
+      "Bash(git push --force:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean -fdx:*)"
+    ],
+    "defaultMode": "plan"
+  },
+  "model": "Opus",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "WebFetch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CONTENT=$(cat ~/.claude/skills/webfetch-to-md/SKILL.md) && jq -n --arg ctx \"$CONTENT\" '{hookSpecificOutput: {hookEventName: \"PreToolUse\", additionalContext: $ctx}}'",
+            "timeout": 5,
+            "statusMessage": "Loading webfetch-to-md skill..."
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/status.sh"
+  },
+  "effortLevel": "high"
+}
