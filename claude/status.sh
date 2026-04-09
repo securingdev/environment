@@ -11,6 +11,7 @@ RED="\033[38;5;197m"    # Molokai #F92672 — hot pink
 MAGENTA="\033[38;5;141m" # Molokai #AE81FF — purple/magenta
 ORANGE="\033[38;5;208m"  # Molokai #FD971F — orange
 WHITE="\033[38;5;255m"   # Molokai #F8F8F2 — near-white foreground
+YELLOW="\033[38;5;185m"  # Molokai #E6DB74 — muted yellow
 RESET="\033[0m"
 
 # ── Session info ───────────────────────────────────
@@ -44,6 +45,26 @@ else
     repo_path_display="$(basename "$current_dir")"
 fi
 
+# ── Effort level ──────────────────────────────────
+# Try JSON payload first, fall back to settings.json.
+if command -v jq &> /dev/null; then
+    effort=$(echo "$json" | jq -r '.effortLevel // empty' 2>/dev/null || true)
+    if [ -z "$effort" ]; then
+        effort=$(jq -r '.effortLevel // "high"' ~/.claude/settings.json 2>/dev/null || echo "high")
+    fi
+else
+    effort="high"
+fi
+
+# Gradient: max=white, high=orange, medium=yellow, low=grey
+case "$effort" in
+    max)    EFFORT_COLOR="$WHITE";  effort_label="Max"    ;;
+    high)   EFFORT_COLOR="$ORANGE"; effort_label="High"   ;;
+    medium) EFFORT_COLOR="$YELLOW"; effort_label="Medium" ;;
+    low)    EFFORT_COLOR="$GREY";   effort_label="Low"    ;;
+    *)      EFFORT_COLOR="$GREY";   effort_label="$effort" ;;
+esac
+
 # ── Output ─────────────────────────────────────────
 # Pick model highlight color: Sonnet=green, Opus=magenta, other=grey
 if echo "$model_name" | grep -qi "opus"; then
@@ -55,4 +76,4 @@ else
 fi
 
 # Format: [Model $cost] [repo]/path (branch) +added/-removed
-printf "${GREY}[${MODEL_COLOR}${model_name}${GREY} ${WHITE}\$${cost}${GREY}] ${repo_path_display} (${git_branch}) ${GREEN}+${lines_added}${GREY}/${RED}-${lines_removed}${RESET}"
+printf "${GREY}[${MODEL_COLOR}${model_name}${GREY} · ${EFFORT_COLOR}${effort_label}${GREY} · ${WHITE}\$${cost}${GREY}] ${repo_path_display} (${git_branch}) ${GREEN}+${lines_added}${GREY}/${RED}-${lines_removed}${RESET}"
