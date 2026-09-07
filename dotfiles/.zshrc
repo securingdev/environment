@@ -7,19 +7,20 @@ MK_PURPLE=$'%{\e[1;38;5;141m%}'  # #AE81FF
 MK_YELLOW=$'%{\e[1;38;5;185m%}'  # #E6DB74
 MK_RESET=$'%{\e[0m%}'
 
-_git_branch() {
+_prompt_git_branch() {
     local branch
     branch=$(git symbolic-ref --short HEAD 2>/dev/null) || return
     echo " ${branch}"
 }
 
 setopt PROMPT_SUBST
-PROMPT="${MK_PINK}%n${MK_RESET}@${MK_CYAN}%m${MK_RESET}:${MK_ORANGE}%1~${MK_RESET}${MK_PURPLE}\$(_git_branch)${MK_RESET} ${MK_YELLOW}%#${MK_RESET} "
+PROMPT="${MK_PINK}%n${MK_RESET}@${MK_CYAN}%m${MK_RESET}:${MK_ORANGE}%1~${MK_RESET}${MK_PURPLE}\$(_prompt_git_branch)${MK_RESET} ${MK_YELLOW}%#${MK_RESET} "
 
 export TERM=screen-256color
 export PATH=/usr/local/go/bin/go:/opt/homebrew/opt/ruby@3.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.gem/ruby/3.0.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/opt/homebrew/opt/ruby@3.0/bin:
 alias github="cd $HOME/Documents/github"
 alias status="git status"
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
 # Monokai-tinted man pages
